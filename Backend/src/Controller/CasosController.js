@@ -3,12 +3,12 @@ const connection = require('../database/connection');
 module.exports = {
     async Listar(request, response) {
     
-        const {pag = 1 } = request.query;
+        const {page = 1 } = request.query;
         const [count] = await connection('CASOS').count();
         const casos = await connection('CASOS')
         .join('ONGs','ONGs.ID','=','CASOS.ONG_ID')
         .limit(5)
-        .offset((pag - 1) * 5)
+        .offset((page - 1) * 5)
         .select('CASOS.*',
         'ONGs.NOME',
         'ONGs.EMAIL',
