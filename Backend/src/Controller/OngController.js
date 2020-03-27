@@ -1,5 +1,5 @@
-const crypto = require('crypto');
 const connection = require('../database/connection');
+const gerarID = require('../funcoesGenericas/gerarID')
 
 module.exports = {
     async Listar(request,response) {
@@ -12,7 +12,7 @@ module.exports = {
     async Criar(request, response) {
         const { NOME, EMAIL, WHATSAPP, CIDADE, UF } = request.body;
 
-        const id = crypto.randomBytes(4).toString('HEX');
+        const id = gerarID();
 
         await connection('ONGs').insert({
             id,
